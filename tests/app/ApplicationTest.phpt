@@ -2,9 +2,10 @@
 
 namespace App\Tests;
 
-require_once __DIR__ . '/../bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
 
 use App\Application;
+use App\Bootstrap;
 use Tester\Assert;
 use Tester\TestCase;
 
@@ -21,7 +22,7 @@ final class ApplicationTest extends TestCase
      */
     public function testRun(): void
     {
-        $container = create_container();
+        $container = Bootstrap::getContainerForTest();
 
         /** @var Application $application */
         $application = $container->getByName('application');

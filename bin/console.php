@@ -1,10 +1,14 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
-require __DIR__ . '/bootstrap.php';
+use App\Application;
+use App\Bootstrap;
 
-$container = create_container();
+require __DIR__ . '/../vendor/autoload.php';
 
+$container = Bootstrap::getContainer();
+
+/** @var Application $application */
 $application = $container->getByName('application');
 
 exit($application->run());

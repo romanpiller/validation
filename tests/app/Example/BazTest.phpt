@@ -2,7 +2,7 @@
 
 namespace App\Tests\Example;
 
-require_once __DIR__ . '/../../bootstrap.php';
+require __DIR__ . '/../../bootstrap.php';
 
 use App\Example\Bar;
 use App\Example\Baz;
