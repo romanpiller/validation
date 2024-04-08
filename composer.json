@@ -1,0 +1,44 @@
+{
+  "name": "romanpiller/clidi",
+  "description": "Templates for cli - di kontajner bez nette framework",
+  "license": "MIT",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Roman Piller",
+      "email": "roman.piller@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "App\\Tests\\": "tests/app/"
+    }
+  },
+  "require": {
+    "php": "^8.3",
+    "nette/di": "^3.1"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.8",
+    "nette/tester": "^2.4",
+    "mockery/mockery": "1.6.9",
+    "squizlabs/php_codesniffer": "^3.7",
+    "roave/security-advisories": "dev-latest"
+  },
+  "scripts": {
+    "phpstan": "php -dxdebug.mode=off vendor/bin/phpstan analyse -c tests/phpstan.neon app/ tests/",
+    "phpstan-new": "git diff devel --name-only --diff-filter=dr | xargs php -dxdebug.mode=off vendor/bin/phpstan analyse -c tests/phpstan.neon",
+    "phpstan-baseline": "php -dxdebug.mode=off vendor/bin/phpstan analyse -c tests/phpstan.neon app/ tests/ --generate-baseline tests/phpstan-baseline.neon --allow-empty-baseline",
+    "phpcodesniffer": "vendor/bin/phpcs -p -s --colors app/ tests/ --extensions=php,phpt --standard=PSR1,PSR2,PSR12 --exclude=PSR1.Files.SideEffects,PSR12.Files.OpenTag,PSR12.Files.FileHeader ",
+    "phpcodesniffer-new": "git diff devel --name-only --diff-filter=dr | xargs vendor/bin/phpcs -p -s --colors --standard=PSR1,PSR2,PSR12 --exclude=PSR1.Files.SideEffects,PSR12.Files.OpenTag,PSR12.Files.FileHeader",
+    "phptest": "vendor/bin/tester -o console -C -s tests",
+    "phpcover": "vendor/bin/tester -C tests --coverage-src app/ --coverage tests/cover.html",
+    "check-new": ["@phpstan-new", "@phpcodesniffer-new"],
+    "check-all": ["@phpstan", "@phptest", "@phpcover", "@phpcodesniffer"]
+  }
+}
