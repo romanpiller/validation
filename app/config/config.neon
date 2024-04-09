@@ -1,6 +1,9 @@
 services:
     application: App\Application
 
-    - App\Example\Foo
-    - App\Example\Bar
-    - App\Example\Baz
+    - App\Package\PackageInput
+
+# validatory
+    - App\Validators\MaxDimension
+    - App\Validators\MaxSize
+    - App\Validators\MinSize

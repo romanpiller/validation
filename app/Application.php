@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Example\Baz;
-use App\Example\Foo;
+use App\Package\PackageInput;
+use Exception;
 
 /**
  * Class Application
@@ -13,12 +13,12 @@ use App\Example\Foo;
 final class Application
 {
     /**
-     * Constructor
-     *
-     * @param Foo $foo
-     * @param Baz $baz
+     * Konstruktor
+     * @param PackageInput $packageInput
      */
-    public function __construct(private Foo $foo, private Baz $baz)
+    public function __construct(
+        private readonly PackageInput $packageInput,
+    )
     {
     }
 
@@ -29,9 +29,15 @@ final class Application
      */
     public function run(): int
     {
-        echo 'Spustim aplikaciu.' . PHP_EOL;
-        $this->foo->info();
-        $this->baz->info();
+        echo 'Utikej Foreste...' . PHP_EOL;
+        try
+        {
+            $this->packageInput->validate();
+        }
+        catch (Exception $e)
+        {
+            echo $e->getMessage() . PHP_EOL;
+        }
         return 0;
     }
 }
